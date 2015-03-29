@@ -1,0 +1,21 @@
+.foodname {
+	font-weight: bold;
+	display: inline;
+	padding: 5px;
+}
+
+.foodprice {
+	display: inline;
+	padding: 5px;
+}
+
+.foodcalories {
+	display: inline;
+	padding: 5px;
+}
+
+.fooddescription {
+	font-style: italic;
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
