@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sport.xsl"?>
+<mixedteams>
+	<football> 
+		<Team>Newcastle United</Team>
+		<Color>Aquamarine</Color>
+		<Image>http://www-scf.usc.edu/~csci571/2011Spring/hw4/ncastle.jpg</Image>
+		<Striker>
+			<name>Andrew Carroll</name>
+			<age>22</age>
+			<squadnum>39</squadnum>
+		</Striker> 
+		<Manager>Alan Pardew</Manager>
+		<Stadium>St James' Park</Stadium>
+		<video>http://www.youtube.com/embed/fC3AUTcDY7w</video>
+	</football>
+	<football> 
+		<Team>Aston Villa</Team>
+		<Color>Gold</Color>
+		<Image>http://www-scf.usc.edu/~csci571/2011Spring/hw4/avilla.jpg</Image>
+		<Striker>
+			<name>Gabriel Agbonlahor</name>
+			<age>24</age>
+			<squadnum>11</squadnum>
+		</Striker> 
+		<Manager>Gerard Houllier</Manager>
+		<Stadium>Villa Park</Stadium>
+		<video>http://www.youtube.com/embed/Gz_vlEbdv7c</video>
+	</football>
+</mixedteams>

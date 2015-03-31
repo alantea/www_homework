@@ -1,4 +1,5 @@
-var data_football;
+var xml,xsl;
+var newWindow;
 document.getElementById("xmlform").onsubmit = function()
 {
 	var url = document.getElementById("xmlurl").value;
@@ -9,6 +10,7 @@ document.getElementById("xmlform").onsubmit = function()
 		return false;
 	}
 	
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{
 		xmlhttp = new XMLHttpRequest();
@@ -17,22 +19,26 @@ document.getElementById("xmlform").onsubmit = function()
 	{	// for IE6, IE5
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	xmlhttp.open("GET", url);
-	xmlhttp.send();
-	
+	xmlhttp.open("GET", url, true);
 	var newWindow = window.open("", "", "width=800, height=600");
-
 
 	/* start to write data */
 	xmlhttp.onreadystatechange = function()
+//	xmlhttp.onload = function()		// suggest use in modern browser
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
+			var xmlDoc = xmlhttp.responseXML;
+			if( xmlDoc == null )
+			{
+				alert( "Error in XML file." );
+				newWindow.close();
+				return true;
+			}
+
 			// header
 			newWindow.document.write( "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\">" );
-			newWindow.document.write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"popup.css\"></head><body><center>" );
-			
-			var xmlDoc = xmlhttp.responseXML;
+			newWindow.document.write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"popup.css\"></head><body><center>" );		
 
 			/* Food menu */
 			newWindow.document.write( "<h1>Food Menu</h1>" );
@@ -52,8 +58,7 @@ document.getElementById("xmlform").onsubmit = function()
 
 			/* sport menu */
 			newWindow.document.write( "<h1>Sports</h1><table width=\"700\" class=\"sport\">" );
-	//		var data_football =  xmlDoc.getElementsByTagName("football");
-			data_football =  xmlDoc.getElementsByTagName("football");
+			var data_football =  xmlDoc.getElementsByTagName("football");
 			
 			for( i = 0 ; i < data_football.length ; i++ )
 			{
@@ -94,15 +99,18 @@ document.getElementById("xmlform").onsubmit = function()
 			{
 				newWindow.document.write( "</table>" );
 			}
+			
+			// footer
+			newWindow.document.write( "</center></body></html>" );
 		}
 		else if (xmlhttp.readyState==4 && xmlhttp.status!=200)
 		{
-			console.log("Error: "+xmlhttp.status)
+	//		console.log("Error: "+xmlhttp.status)
+			alert("Error status");
 		}
 		
-		// footer
-		newWindow.document.write( "</center></body></html>" );
 	}
+	xmlhttp.send();
 
 	// prever the page data lose
 	return false;
@@ -110,9 +118,67 @@ document.getElementById("xmlform").onsubmit = function()
 
 document.getElementById("xslurl").onclick = function()
 {
-
-	var newWindow = window.open("", "", "width=800, height=600");
-
+	if (window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+		xslhttp = new XMLHttpRequest();
+	}
+	else
+	{	// for IE6, IE5
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+		xslhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	}
+	xmlhttp.open("GET", "http://dmplus.cs.ccu.edu.tw/~dmplus/sport.xml");
+	xslhttp.open("GET", "sport.xsl");
+	
+	newWindow = window.open("", "", "width=800, height=600");
+	
+	xmlhttp.onreadystatechange = function ()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200 && xslhttp.readyState==4 && xslhttp.status==200 )
+		{
+			xml = xmlhttp.responseXML;
+			xsl = xslhttp.responseXML;
+			// code for all browser expect IE
+			if (document.implementation && document.implementation.createDocument)
+			{
+				var xsltProcessor = new XSLTProcessor();
+				xsltProcessor.importStylesheet(xsl);
+				var resultDocument = xsltProcessor.transformToFragment(xml, document);
+				newWindow.document.body.appendChild( resultDocument );
+			}
+			else if( window.ActiveXObject || xhttp.responseType == "msxml-document" )
+			{
+				ex = xml.transformNode(xsl);
+				newWindow.document.write(ex);
+			}
+		}
+	}
+ 
+	xslhttp.onreadystatechange = function ()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200 && xslhttp.readyState==4 && xslhttp.status==200 )
+		{
+			xml = xmlhttp.responseXML;
+			xsl = xslhttp.responseXML;
+			// code for all browser expect IE
+			if (document.implementation && document.implementation.createDocument)
+			{
+				var xsltProcessor = new XSLTProcessor();
+				xsltProcessor.importStylesheet(xsl);
+				var resultDocument = xsltProcessor.transformToFragment(xml, document);
+				newWindow.document.body.appendChild( resultDocument );
+			}
+			else if( window.ActiveXObject || xhttp.responseType == "msxml-document" )
+			{
+				ex = xml.transformNode(xsl);
+				newWindow.document.write(ex);
+			}
+		}
+	}
+	xmlhttp.send();
+	xslhttp.send();
+	
 	// prevent to next page
 	return false;
 }
