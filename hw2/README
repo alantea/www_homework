@@ -1,0 +1,13 @@
+WWW Technologies and Applications 2015
+HOMEWORK#2
+NAME : Chia-Lun Ho
+CCU ID: 400410022
+
+Files : index.html  popup.css  sport_apply.xsl  sport.xml  web.css  web.js
+
+Link : http://www.cs.ccu.edu.tw/~s400410022/index.html click on the hyperlink "Link to Homework#2"
+
+The page has a input box that can type hyperlink to load XML file.
+And then, click "Submit Query" open a window and load XML file.
+
+The hyperlink "View XSL result for sport.xml" can load XML with XSL file.

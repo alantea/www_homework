@@ -9,8 +9,12 @@
 	<div id="content">
 	<h1>Enter XML file</h1>
 	<form id="xmlform" >
-		<input type="text" id="xmlurl" value="http://dmplus.cs.ccu.edu.tw/~dmplus/mixed.xml" />
+		<input type="text" id="xmlurl" />
+		<!-- only load xml && xsl -->
+		<a href="#" id="xmlxslurl">View XSL result for sport.xml</a>
+		<!-- using javascript to load xml & xsl
 		<a href="#" id="xslurl">View XSL result for sport.xml</a>
+		-->
 		<input type="submit" value="Submit Query" />
 	</form>
 	</div>

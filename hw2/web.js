@@ -1,4 +1,5 @@
 var xml,xsl;
+	var xmlhttp;
 var newWindow;
 document.getElementById("xmlform").onsubmit = function()
 {
@@ -116,6 +117,13 @@ document.getElementById("xmlform").onsubmit = function()
 	return false;
 }
 
+document.getElementById("xmlxslurl").onclick = function()
+{
+	var newWindow = window.open("", "", "width=800, height=600");
+	newWindow.location.href= "sport.xml";
+}
+
+/*
 document.getElementById("xslurl").onclick = function()
 {
 	if (window.XMLHttpRequest)
@@ -129,7 +137,7 @@ document.getElementById("xslurl").onclick = function()
 		xslhttp = new ActiveXObject("Msxml2.XMLHTTP");
 	}
 	xmlhttp.open("GET", "http://dmplus.cs.ccu.edu.tw/~dmplus/sport.xml");
-	xslhttp.open("GET", "sport.xsl");
+	xslhttp.open("GET", "sport_apply.xsl");
 	
 	newWindow = window.open("", "", "width=800, height=600");
 	
@@ -178,7 +186,5 @@ document.getElementById("xslurl").onclick = function()
 	}
 	xmlhttp.send();
 	xslhttp.send();
-	
-	// prevent to next page
-	return false;
 }
+*/
